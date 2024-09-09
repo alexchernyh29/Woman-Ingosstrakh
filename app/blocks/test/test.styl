@@ -9,6 +9,7 @@
         height 100%
 
     &__container
+        overflow hidden
         max-width w(1150)
         width 100%
         position absolute
@@ -75,6 +76,7 @@
         display flex
         flex-direction row
         justify-content center
+        transition transform 0.3s ease
         +below(800px)
             padding wm(20) 0 wm(50)
 
@@ -253,23 +255,33 @@
             border-left wm(15) solid $c-black
     
     &__wrap__button
-        position absolute
-        z-index 100
-        width w(1050)
-        top 50%
-        left 5%
         display flex
         flex-direction row
         justify-content space-between
         +below(800px)
             position relative
             width 100%
+            height wm(150)
             left 0
             padding wm(30) wm(10) wm(30) wm(30)
 
-    &__wrap__button-prev,
-    &__wrap__button-next
+    &__wrap__button-prev
+        position absolute
+        z-index 100
+        top 50%
+        left 5%
         cursor pointer
+        +below(800px)
+            top 0%
+
+    &__wrap__button-next
+        position absolute
+        z-index 100
+        top 50%
+        right 5%
+        cursor pointer
+        +below(800px)
+            top 0%
 
     &__wrap__triangle
         content ""
@@ -288,18 +300,18 @@
                 border-top wm(20) solid transparent
                 border-bottom wm(20) solid transparent
                 border-right wm(40) solid $c-grey
-                left wm(240)
+                left wm(220)
 
         &.experience
             border-top w(30) solid transparent
             border-bottom w(30) solid transparent
             border-left w(50) solid $c-grey
-            left w(760)
+            left w(-60)
             +below(800px)
                 border-top wm(20) solid transparent
                 border-bottom wm(20) solid transparent
                 border-left wm(40) solid $c-grey
-                left wm(350)
+                left wm(-40)
 
     &__wrap__text
         color $c-grey
