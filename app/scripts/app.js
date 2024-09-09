@@ -52,8 +52,6 @@ $(() => {
         isDragging = false;
         $('.test__wrap').css('transition', 'transform 0.3s ease');
         $('.test__wrap').css('transform', 'translateX(0)');
-
-        // Если добавлено, слайдить на ближайший слайд
         if (Math.abs(currentTranslate) > 50) {
         if (currentTranslate < 0) {
             $('.test__wrap').slick('slickNext');
