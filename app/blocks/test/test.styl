@@ -9,7 +9,7 @@
         height 100%
 
     &__container
-        overflow hidden
+        // overflow hidden
         max-width w(1150)
         width 100%
         position absolute
@@ -67,9 +67,11 @@
         font-weight 700
         line-height 120%
         text-align center
+        height w(60)
         +below(800px)
             margin wm(110) wm(40) wm(0)
-            font-size wm(30)
+            font-size wm(34)
+            height wm(400)
 
     &__wrap
         padding w(20) 0 w(50)
@@ -89,6 +91,26 @@
         +below(800px)
             padding wm(20)
             margin-left 0%
+
+    &__cards
+        width w(351)
+        height w(462)
+        border w(1) solid $c-grey
+        border-radius w(15)
+        position absolute
+        top 30%
+        left 33.5%
+        transform translate(-50%, -50%)
+        z-index -1
+        background-color $c-grey
+        transform rotate(5.21deg)
+        +below(800px)
+            width wm(600)
+            height wm(930)
+            top 32%
+            left 3.5%
+            border-radius wm(30)
+            transform rotate(2.21deg)
     
     &__card
         display flex
@@ -101,31 +123,6 @@
             width wm(600)
             height wm(800)
             border-radius wm(30)
-        
-        &::before
-            content ""
-            width w(351)
-            height w(432)
-            border w(1) solid $c-grey
-            border-radius w(15)
-            position absolute
-            top w(35)
-            left 44.5%
-            z-index -1
-            background-color $c-grey
-            transform rotate(5.21deg)
-
-            +below(1200px)
-                top w(60)
-                left 45.5%
-
-            +below(800px)
-                width wm(600)
-                height wm(900)
-                border-radius wm(30)
-                top wm(15)
-                left 34.5%
-                transform rotate(3.21deg)
 
         &.risk
             background $c-yellow
@@ -211,8 +208,7 @@
                 +below(800px)
                     width wm(100)
                     height wm(100)
-                    left wm(140)
-                
+                    left wm(140)        
 
     &__card__text
         margin-top w(20)

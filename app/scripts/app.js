@@ -135,7 +135,9 @@ $(() => {
             );
           }
         const secondSlideIndex = 1;
-        $('.test__wrap').slick('slickGoTo', secondSlideIndex);
+        
+        $('.test__wrap').slick('slickGoTo', secondSlideIndex).css('opacity', '0').fadeOut(0);
+        $('.test__wrap').slick('slickGoTo', secondSlideIndex).css('opacity', '1').fadeIn(1500);
   });
 	
 });
