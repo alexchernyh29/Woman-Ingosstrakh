@@ -20,6 +20,8 @@
         border w(1) solid $c-black
         border-radius w(20)
         +below(800px)
+            background-image url('/images/bg-mobile.png')
+            border-radius wm(30)
             position relative
             max-width 100%
             top 0%
@@ -47,11 +49,11 @@
         top 50%
         left 50%
         transform translate(-50%, -50%)
-        color $c-black
-        font-family $ff-gothampro
+        color $c-grey
+        font-family $ff-gothampro_bold
         font-size w(65)
         font-weight 700
-        line-height 120%
+        line-height 100%
         text-align center
         +below(800px)
             font-size wm(65)
@@ -66,7 +68,7 @@
         text-align center
         +below(800px)
             margin wm(110) wm(40) wm(0)
-            font-size wm(20)
+            font-size wm(30)
 
     &__wrap
         padding w(20) 0 w(50)
@@ -102,13 +104,13 @@
             content ""
             width w(351)
             height w(432)
-            border w(1) solid $c-black
+            border w(1) solid $c-grey
             border-radius w(15)
             position absolute
             top w(35)
             left 44.5%
             z-index -1
-            background-color $c-black
+            background-color $c-grey
             transform rotate(5.21deg)
 
             +below(1200px)
@@ -156,13 +158,17 @@
         +below(800px)
             width wm(600)
             height wm(900)
+            img
+                width 100%
+                border-radius wm(30)
+                border wm(1) solid $c-black
         img
             width 100%
         
 
     &__card__title
         position relative
-        color $c-black
+        color $c-grey
         font-family $ff-gothampro_black
         font-size w(43)
         font-weight 400
@@ -276,23 +282,23 @@
         &.risk
             border-top w(30) solid transparent
             border-bottom w(30) solid transparent
-            border-right w(50) solid black
+            border-right w(50) solid $c-grey
             left w(210)
             +below(800px)
                 border-top wm(20) solid transparent
                 border-bottom wm(20) solid transparent
-                border-right wm(40) solid black
+                border-right wm(40) solid $c-grey
                 left wm(240)
 
         &.experience
             border-top w(30) solid transparent
             border-bottom w(30) solid transparent
-            border-left w(50) solid black
+            border-left w(50) solid $c-grey
             left w(760)
             +below(800px)
                 border-top wm(20) solid transparent
                 border-bottom wm(20) solid transparent
-                border-left wm(40) solid black
+                border-left wm(40) solid $c-grey
                 left wm(350)
 
     &__wrap__text
