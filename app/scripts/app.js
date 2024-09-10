@@ -23,12 +23,16 @@ $(() => {
     $('.test__wrap__button-next').click(function() {
         const thirdSlideIndex = 2; // Индекс 3-го слайда (начиная с 0)
         $('.test__wrap').slick('slickGoTo', thirdSlideIndex);
+        $('.test__cardv.risk.visible').css('display', 'none');
+        $('.test__cardv.experience.visible').css('display', 'flex');
     });
 
     // Обработчик клика на кнопку "Риск"
     $('.test__wrap__button-prev').click(function() {
         const firstSlideIndex = 0; // Индекс 1-го слайда
         $('.test__wrap').slick('slickGoTo', firstSlideIndex);
+        $('.test__cardv.experience.visible').css('display', 'none');
+        $('.test__cardv.risk.visible').css('display', 'flex');
     });
 
     let isDragging = false;
@@ -58,15 +62,34 @@ $(() => {
         $('.test__wrap').css('transform', 'translateX(' + currentTranslate + 'px)');
     });
 
+    $('.test__wrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+        // Определяем направление свайпа
+        if(currentSlide === 1 && nextSlide === 2) {
+          // Свайп вправо с 2 до 3
+          setTimeout(function() {
+            $('.test__cardv.risk.visible').css('display', 'none');
+            $('.test__cardv.experience.visible').css('display', 'flex');
+        }, 0);
+        } else if(currentSlide === 1 && nextSlide === 0) {
+          // Свайп влево с 2 до 1
+          setTimeout(function() {
+            $('.test__cardv.experience.visible').css('display', 'none');
+            $('.test__cardv.risk.visible').css('display', 'flex');
+        }, 0);
+        }
+      });
+
     $(document).on('mouseup touchend', function() {
         isDragging = false;
         $('.test__wrap').css('transition', 'transform 0.3s ease');
         $('.test__wrap').css('transform', 'translateX(0)');
         if (Math.abs(currentTranslate) > 50) {
-        if (currentTranslate < 0) {
+        if (currentTranslate > 0) {
             $('.test__wrap').slick('slickNext');
+            
         } else {
             $('.test__wrap').slick('slickPrev');
+            
         }
         }
         

@@ -125,6 +125,55 @@
             border-radius wm(30)
 
         &.risk
+            opacity 0
+            background $c-yellow
+            padding w(30)
+            border w(1) solid $c-black
+            +below(800px)
+                padding wm(30)
+                height wm(900)
+            &::before
+                left 11%
+                +below(1200px)
+                    left 12%
+                +below(800px)
+                    left 1.5%
+
+        &.experience
+            opacity 0
+            background $c-blue
+            padding w(30)
+            border w(1) solid $c-black
+            +below(800px)
+                padding wm(30)
+                height wm(900)
+            &::before
+                left 78%
+                +below(1200px)
+                    left 78.5%
+                +below(800px)
+                    left 68%
+
+    &__cardv
+        position absolute
+        top 59%
+        left 50%
+        transform translate(-50%, -50%)
+        display flex
+        flex-direction column
+        justify-content space-between
+        width w(351)
+        height w(432)
+        border-radius w(15)
+        +below(800px)
+            width wm(600)
+            height wm(800)
+            border-radius wm(30)
+
+        &.visible
+            display none
+
+        &.risk
             background $c-yellow
             padding w(30)
             border w(1) solid $c-black
