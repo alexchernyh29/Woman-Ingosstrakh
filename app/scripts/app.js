@@ -17,8 +17,18 @@ $(() => {
         slidesToScroll: 1,
         infinite: false,
         initialSlide: 1,
-        prevArrow: $('.test__wrap__button-prev'),
-        nextArrow: $('.test__wrap__button-next'),
+        arrows: false
+    });
+
+    $('.test__wrap__button-next').click(function() {
+        const thirdSlideIndex = 2; // Индекс 3-го слайда (начиная с 0)
+        $('.test__wrap').slick('slickGoTo', thirdSlideIndex);
+    });
+
+    // Обработчик клика на кнопку "Риск"
+    $('.test__wrap__button-prev').click(function() {
+        const firstSlideIndex = 0; // Индекс 1-го слайда
+        $('.test__wrap').slick('slickGoTo', firstSlideIndex);
     });
 
     let isDragging = false;
@@ -115,29 +125,75 @@ $(() => {
             image: "/images/карточки-десктоп-7.png",
             smallImage: "/images/карточки-мобилка-7.jpg",
         },
+        {
+            title: "Вы прошли тест"
+        },
     ];
 
     $('.test__card__link').click(function() {
         currentIndex = (currentIndex + 1) % DATA.length;
-        $(".test__counter-text").html(currentIndex + 1);
-		$(".test__text").html(DATA[currentIndex].title);
-		$(".test__card__text.risk").html(DATA[currentIndex].risk);
-        $(".test__card__text.experience").html(DATA[currentIndex].experience);
-        if (window.matchMedia("(max-width: 800px)").matches) {
-            // Если ширина экрана меньше 800px, используем альтернативные изображения
-            $(".test__img").html(
-              `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
-            );
-          } else {
-            // Для экранов шире 800px используем оригинальные изображения
-            $(".test__img").html(
-              `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
-            );
-          }
-        const secondSlideIndex = 1;
+        console.log(currentIndex)
+        if(currentIndex < 7){
+            $(".test__counter").css('display', 'block');
+            $(".test__wrap").css('display', 'block');
+            $(".test__wrap__button").css('display', 'block');
+            $(".test__cards").css('display', 'block');
+            $(".test__counter-text").html(currentIndex + 1);
+            $(".test__text").html(DATA[currentIndex].title);
+            $(".test__card__text.risk").html(DATA[currentIndex].risk);
+            $(".test__card__text.experience").html(DATA[currentIndex].experience);
+            if (window.matchMedia("(max-width: 800px)").matches) {
+                $(".test__img").html(
+                `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
+                );
+            } else {
+                $(".test__img").html(
+                `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
+                );
+            }
+            const secondSlideIndex = 1;
+            
+            $('.test__wrap').slick('slickGoTo', secondSlideIndex);
+            
+            $('.test__card').addClass('hidden');
+
+            setTimeout(function() {
+                $('.test__card').removeClass('hidden');
+            }, 500);
+        }else{
+            $(".test__counter").css('display', 'none');
+            $(".test__wrap").css('display', 'none');
+            $(".test__wrap__button").css('display', 'none');
+            $(".test__cards").css('display', 'none');
+            $(".test__text").css('display', 'none');
+            $(".test__wrap__next").css('display', 'flex');
+            $('.test__next').click(function() {
+                currentIndex = 0;
+                console.log(currentIndex)
+                $(".test__counter").css('display', 'block');
+                $(".test__wrap").css('display', 'block');
+                $(".test__wrap__button").css('display', 'block');
+                $(".test__cards").css('display', 'block');
+                $(".test__text").css('display', 'block');
+                $(".test__wrap__next").css('display', 'none');
+                $(".test__counter-text").html(currentIndex + 1);
+                $(".test__text").html(DATA[currentIndex].title);
+                $(".test__card__text.risk").html(DATA[currentIndex].risk);
+                $(".test__card__text.experience").html(DATA[currentIndex].experience);
+                if (window.matchMedia("(max-width: 800px)").matches) {
+                    $(".test__img").html(
+                    `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
+                    );
+                } else {
+                    $(".test__img").html(
+                    `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
+                    );
+                }
+                const secondSlideIndex = 1;
+                $('.test__wrap').slick('slickGoTo', secondSlideIndex);
+            })
+        }
         
-        $('.test__wrap').slick('slickGoTo', secondSlideIndex).css('opacity', '0').fadeOut(0);
-        $('.test__wrap').slick('slickGoTo', secondSlideIndex).css('opacity', '1').fadeIn(1500);
   });
 	
 });

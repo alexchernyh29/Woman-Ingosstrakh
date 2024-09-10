@@ -353,3 +353,44 @@
                     height wm(100)
                     right wm(190)
 
+    &__wrap__next
+        padding w(250)
+        display none
+        flex-direction column
+        justify-content center
+        align-items center
+        +below(800px)
+            padding wm(420) wm(40)
+
+    &__next
+        padding w(40) w(50)
+        background-color #0047BA
+        border-radius w(80)
+        cursor pointer
+        color $c-white
+        border none
+        font-family $ff-gothampro_bold
+        font-size w(40)
+        font-weight 700
+        line-height 110%
+        +below(800px)
+            padding wm(40) wm(50)
+            border-radius wm(80)
+            font-size wm(40)
+
+    &__next-text
+        margin-bottom w(20)
+        color $c-black
+        font-family $ff-gothampro_bold
+        font-size w(38)
+        font-weight 700
+        line-height 110%
+        +below(800px)
+            margin-bottom wm(20)
+            font-size wm(38)
+
+
+.hidden {
+    // display: none;
+    opacity: 0;    
+}
