@@ -35,32 +35,32 @@ $(() => {
         $('.test__cardv.risk.visible').css('display', 'flex');
     });
 
-    let isDragging = false;
-    let startPos = { x: 0, y: 0 };
-    let currentTranslate = 0;
+    // let isDragging = false;
+    // let startPos = { x: 0, y: 0 };
+    // let currentTranslate = 0;
 
-    $('.test__container').on('mousedown touchstart', function(e) {
-        isDragging = true;
-        startPos = {
-        x: e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX,
-        y: e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY
-        };
-        $('.test__wrap').css('transition', 'none');
-    });
+    // $('.test__container').on('mousedown touchstart', function(e) {
+    //     isDragging = true;
+    //     startPos = {
+    //     x: e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX,
+    //     y: e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY
+    //     };
+    //     $('.test__wrap').css('transition', 'none');
+    // });
 
-    $(document).on('mousemove touchmove', function(e) {
-        if (!isDragging) return;
+    // $(document).on('mousemove touchmove', function(e) {
+    //     if (!isDragging) return;
 
-        let currentPos = {
-        x: e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX,
-        y: e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY
-        };
+    //     let currentPos = {
+    //     x: e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX,
+    //     y: e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY
+    //     };
 
-        let diffX = currentPos.x - startPos.x;
-        currentTranslate = diffX;
+    //     let diffX = currentPos.x - startPos.x;
+    //     currentTranslate = diffX;
         
-        $('.test__wrap').css('transform', 'translateX(' + currentTranslate + 'px)');
-    });
+    //     $('.test__wrap').css('transform', 'translateX(' + currentTranslate + 'px)');
+    // });
 
     $('.test__wrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         // Определяем направление свайпа
@@ -83,22 +83,22 @@ $(() => {
         // }
       });
 
-    $(document).on('mouseup touchend', function() {
-        isDragging = false;
-        $('.test__wrap').css('transition', 'transform 0.3s ease');
-        $('.test__wrap').css('transform', 'translateX(0)');
-        if (Math.abs(currentTranslate) > 50) {
-        if (currentTranslate > 0) {
-            $('.test__wrap').slick('slickNext');
+    // $(document).on('mouseup touchend', function() {
+    //     isDragging = false;
+    //     $('.test__wrap').css('transition', 'transform 0.3s ease');
+    //     $('.test__wrap').css('transform', 'translateX(0)');
+    //     if (Math.abs(currentTranslate) > 50) {
+    //     if (currentTranslate > 0) {
+    //         $('.test__wrap').slick('slickNext');
             
-        } else {
-            $('.test__wrap').slick('slickPrev');
+    //     } else {
+    //         $('.test__wrap').slick('slickPrev');
             
-        }
-        }
+    //     }
+    //     }
         
-        currentTranslate = 0;
-    });
+    //     currentTranslate = 0;
+    // });
 
     let currentIndex = 0;
 
