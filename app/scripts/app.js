@@ -11,8 +11,7 @@ $(() => {
         `<img src="/images/карточки-десктоп-1.png" alt="Large Image" />`
         );
     }
-	$('.test__wrap').slick({
-        infinite: true, 
+	const $slider = $('.test__wrap').slick({ 
         slidesToShow: 1, 
         slidesToScroll: 1,
         infinite: false,
@@ -20,20 +19,137 @@ $(() => {
         arrows: false
     });
 
+    // Флаг для отслеживания взаимодействия
+    let hasInteracted = false;
+
+    // Обработчик клика на кнопку "Опыт"
     $('.test__wrap__button-next').click(function() {
-        const thirdSlideIndex = 2; // Индекс 3-го слайда (начиная с 0)
-        $('.test__wrap').slick('slickGoTo', thirdSlideIndex);
-        $('.test__cardv.risk.visible').css('display', 'none');
-        $('.test__cardv.experience.visible').css('display', 'flex');
+        if (!hasInteracted) {
+            hasInteracted = true; // Устанавливаем флаг на первое взаимодействие
+            const thirdSlideIndex = 0; // Индекс 3-го слайда
+            $('.test__wrap').slick('slickGoTo', thirdSlideIndex);
+            $('.test__cardv.risk.visible').css('display', 'none');
+            $('.test__cardv.experience.visible').css('display', 'flex');
+
+            // Отключаем прокрутку слайдера
+            $slider.slick('slickSetOption', 'draggable', false, true);
+            $slider.slick('slickSetOption', 'swipe', false, true);
+
+            // // Отключаем кнопки "Вперед" и "Назад"
+            // $('.test__wrap__button-next, .test__wrap__button-prev').prop('disabled', true);
+        }
     });
 
     // Обработчик клика на кнопку "Риск"
     $('.test__wrap__button-prev').click(function() {
-        const firstSlideIndex = 0; // Индекс 1-го слайда
-        $('.test__wrap').slick('slickGoTo', firstSlideIndex);
-        $('.test__cardv.experience.visible').css('display', 'none');
-        $('.test__cardv.risk.visible').css('display', 'flex');
+        if (!hasInteracted) {
+            hasInteracted = true; // Устанавливаем флаг на первое взаимодействие
+            const firstSlideIndex = 2; // Индекс 1-го слайда
+            $('.test__wrap').slick('slickGoTo', firstSlideIndex);
+            $('.test__cardv.experience.visible').css('display', 'none');
+            $('.test__cardv.risk.visible').css('display', 'flex');
+            // Отключаем прокрутку слайдера
+            $slider.slick('slickSetOption', 'draggable', false, true);
+            $slider.slick('slickSetOption', 'swipe', false, true);
+            // // Отключаем кнопки "Вперед" и "Назад"
+            // $('.test__wrap__button-next, .test__wrap__button-prev').prop('disabled', true);
+        }
     });
+
+    $('.test__wrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+        // Определяем направление свайпа
+        if(currentSlide === 1 && nextSlide === 2) {
+            $slider.slick('slickSetOption', 'draggable', false, true);
+            $slider.slick('slickSetOption', 'swipe', false, true);
+            hasInteracted = true;
+        // Свайп вправо с 2 до 3
+            setTimeout(function() {
+                $('.test__cardv.experience.visible').css('display', 'none');
+                $('.test__cardv.risk.visible').css('display', 'flex');
+            }, 0);
+        } else if(currentSlide === 1 && nextSlide === 0) {
+            $slider.slick('slickSetOption', 'draggable', false, true);
+            $slider.slick('slickSetOption', 'swipe', false, true);
+            hasInteracted = true;
+        // Свайп влево с 2 до 1
+            setTimeout(function() {
+                $('.test__cardv.risk.visible').css('display', 'none');
+                $('.test__cardv.experience.visible').css('display', 'flex');
+            }, 0);
+        }
+      });
+
+    $('.test__card__link').click(function() {
+        currentIndex = (currentIndex + 1) % DATA.length;
+        hasInteracted = false;
+        $slider.slick('slickSetOption', 'draggable', true, true);
+        $slider.slick('slickSetOption', 'swipe', true, true);
+        if(currentIndex < 7){
+            $(".test__counter").css('display', 'block');
+            $(".test__wrap").css('display', 'block');
+            $(".test__wrap__button").css('display', 'block');
+            $(".test__cards").css('display', 'block');
+            $(".test__counter-text").html(currentIndex + 1);
+            $(".test__text").html(DATA[currentIndex].title);
+            $(".test__card__text.risk").html(DATA[currentIndex].risk);
+            $(".test__card__text.experience").html(DATA[currentIndex].experience);
+            if (window.matchMedia("(max-width: 800px)").matches) {
+                $(".test__img").html(
+                `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
+                );
+            } else {
+                $(".test__img").html(
+                `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
+                );
+            }
+            const secondSlideIndex = 1;
+            
+            $('.test__wrap').slick('slickGoTo', secondSlideIndex);
+            
+            $('.test__card').addClass('hidden');
+
+            setTimeout(function() {
+                $('.test__card').removeClass('hidden');
+            }, 500);
+        }else{
+            $(".test__counter").css('display', 'none');
+            $(".test__wrap").css('display', 'none');
+            $(".test__wrap__button").css('display', 'none');
+            $(".test__cards").css('display', 'none');
+            $(".test__text").css('display', 'none');
+            $('.test__cardv.experience.visible').css('display', 'none');
+            $('.test__cardv.risk.visible').css('display', 'none');
+            $(".test__wrap__next").css('display', 'flex');
+            $('.test__next').click(function() {
+                currentIndex = 0;
+                console.log(currentIndex)
+                $(".test__counter").css('display', 'block');
+                $(".test__wrap").css('display', 'block');
+                $(".test__wrap__button").css('display', 'block');
+                $(".test__cards").css('display', 'block');
+                $(".test__text").css('display', 'block');
+                $('.test__cardv.experience.visible').css('display', 'flex');
+                $('.test__cardv.risk.visible').css('display', 'flex');
+                $(".test__wrap__next").css('display', 'none');
+                $(".test__counter-text").html(currentIndex + 1);
+                $(".test__text").html(DATA[currentIndex].title);
+                $(".test__card__text.risk").html(DATA[currentIndex].risk);
+                $(".test__card__text.experience").html(DATA[currentIndex].experience);
+                if (window.matchMedia("(max-width: 800px)").matches) {
+                    $(".test__img").html(
+                    `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
+                    );
+                } else {
+                    $(".test__img").html(
+                    `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
+                    );
+                }
+                const secondSlideIndex = 1;
+                $('.test__wrap').slick('slickGoTo', secondSlideIndex);
+            })
+        }
+        
+  });
 
     // let isDragging = false;
     // let startPos = { x: 0, y: 0 };
@@ -61,27 +177,6 @@ $(() => {
         
     //     $('.test__wrap').css('transform', 'translateX(' + currentTranslate + 'px)');
     // });
-
-    $('.test__wrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-        // Определяем направление свайпа
-        if(currentSlide === 1 && nextSlide === 2) {
-          // Свайп вправо с 2 до 3
-          setTimeout(function() {
-            $('.test__cardv.risk.visible').css('display', 'none');
-            $('.test__cardv.experience.visible').css('display', 'flex');
-        }, 0);
-        } else if(currentSlide === 1 && nextSlide === 0) {
-          // Свайп влево с 2 до 1
-          setTimeout(function() {
-            $('.test__cardv.experience.visible').css('display', 'none');
-            $('.test__cardv.risk.visible').css('display', 'flex');
-        }, 0);
-        }
-        // else {
-        //     $('.test__cardv.experience.visible').css('display', 'none');
-        //     $('.test__cardv.risk.visible').css('display', 'none');
-        // }
-      });
 
     // $(document).on('mouseup touchend', function() {
     //     isDragging = false;
@@ -156,75 +251,4 @@ $(() => {
             title: "Вы прошли тест"
         },
     ];
-
-    $('.test__card__link').click(function() {
-        currentIndex = (currentIndex + 1) % DATA.length;
-        console.log(currentIndex)
-        if(currentIndex < 7){
-            $(".test__counter").css('display', 'block');
-            $(".test__wrap").css('display', 'block');
-            $(".test__wrap__button").css('display', 'block');
-            $(".test__cards").css('display', 'block');
-            $(".test__counter-text").html(currentIndex + 1);
-            $(".test__text").html(DATA[currentIndex].title);
-            $(".test__card__text.risk").html(DATA[currentIndex].risk);
-            $(".test__card__text.experience").html(DATA[currentIndex].experience);
-            if (window.matchMedia("(max-width: 800px)").matches) {
-                $(".test__img").html(
-                `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
-                );
-            } else {
-                $(".test__img").html(
-                `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
-                );
-            }
-            const secondSlideIndex = 1;
-            
-            $('.test__wrap').slick('slickGoTo', secondSlideIndex);
-            
-            $('.test__card').addClass('hidden');
-
-            setTimeout(function() {
-                $('.test__card').removeClass('hidden');
-            }, 500);
-        }else{
-            $(".test__counter").css('display', 'none');
-            $(".test__wrap").css('display', 'none');
-            $(".test__wrap__button").css('display', 'none');
-            $(".test__cards").css('display', 'none');
-            $(".test__text").css('display', 'none');
-            $('.test__cardv.experience.visible').css('display', 'none');
-            $('.test__cardv.risk.visible').css('display', 'none');
-            $(".test__wrap__next").css('display', 'flex');
-            $('.test__next').click(function() {
-                currentIndex = 0;
-                console.log(currentIndex)
-                $(".test__counter").css('display', 'block');
-                $(".test__wrap").css('display', 'block');
-                $(".test__wrap__button").css('display', 'block');
-                $(".test__cards").css('display', 'block');
-                $(".test__text").css('display', 'block');
-                $('.test__cardv.experience.visible').css('display', 'flex');
-                $('.test__cardv.risk.visible').css('display', 'flex');
-                $(".test__wrap__next").css('display', 'none');
-                $(".test__counter-text").html(currentIndex + 1);
-                $(".test__text").html(DATA[currentIndex].title);
-                $(".test__card__text.risk").html(DATA[currentIndex].risk);
-                $(".test__card__text.experience").html(DATA[currentIndex].experience);
-                if (window.matchMedia("(max-width: 800px)").matches) {
-                    $(".test__img").html(
-                    `<img src="${DATA[currentIndex].smallImage}" alt="Small Image" />`
-                    );
-                } else {
-                    $(".test__img").html(
-                    `<img src="${DATA[currentIndex].image}" alt="Large Image" />`
-                    );
-                }
-                const secondSlideIndex = 1;
-                $('.test__wrap').slick('slickGoTo', secondSlideIndex);
-            })
-        }
-        
-  });
-	
 });
