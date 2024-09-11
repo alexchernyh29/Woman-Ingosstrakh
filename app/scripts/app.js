@@ -76,10 +76,11 @@ $(() => {
             $('.test__cardv.experience.visible').css('display', 'none');
             $('.test__cardv.risk.visible').css('display', 'flex');
         }, 0);
-        }else {
-            $('.test__cardv.experience.visible').css('display', 'none');
-            $('.test__cardv.risk.visible').css('display', 'none');
         }
+        // else {
+        //     $('.test__cardv.experience.visible').css('display', 'none');
+        //     $('.test__cardv.risk.visible').css('display', 'none');
+        // }
       });
 
     $(document).on('mouseup touchend', function() {
