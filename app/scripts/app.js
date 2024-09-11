@@ -11,12 +11,13 @@ $(() => {
         `<img src="/images/карточки-десктоп-1.png" alt="Large Image" />`
         );
     }
-	const $slider = $('.test__wrap').slick({ 
-        slidesToShow: 1, 
+	const $slider = $('.test__wrap').slick({
         slidesToScroll: 1,
         infinite: false,
         initialSlide: 1,
-        arrows: false
+        arrows: false,
+        swipeToSlide: true,
+        speed: 300
     });
 
     // Флаг для отслеживания взаимодействия
@@ -30,11 +31,9 @@ $(() => {
             $('.test__wrap').slick('slickGoTo', thirdSlideIndex);
             $('.test__cardv.risk.visible').css('display', 'none');
             $('.test__cardv.experience.visible').css('display', 'flex');
-
             // Отключаем прокрутку слайдера
             $slider.slick('slickSetOption', 'draggable', false, true);
             $slider.slick('slickSetOption', 'swipe', false, true);
-
             // // Отключаем кнопки "Вперед" и "Назад"
             // $('.test__wrap__button-next, .test__wrap__button-prev').prop('disabled', true);
         }
@@ -59,19 +58,18 @@ $(() => {
     $('.test__wrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         // Определяем направление свайпа
         if(currentSlide === 1 && nextSlide === 2) {
-            $slider.slick('slickSetOption', 'draggable', false, true);
+            // $slider.slick('slickSetOption', 'draggable', false, true);
             $slider.slick('slickSetOption', 'swipe', false, true);
             hasInteracted = true;
-        // Свайп вправо с 2 до 3
+            // Свайп вправо с 2 до 3
             setTimeout(function() {
                 $('.test__cardv.experience.visible').css('display', 'none');
                 $('.test__cardv.risk.visible').css('display', 'flex');
             }, 0);
         } else if(currentSlide === 1 && nextSlide === 0) {
-            $slider.slick('slickSetOption', 'draggable', false, true);
             $slider.slick('slickSetOption', 'swipe', false, true);
             hasInteracted = true;
-        // Свайп влево с 2 до 1
+            // Свайп влево с 2 до 1
             setTimeout(function() {
                 $('.test__cardv.risk.visible').css('display', 'none');
                 $('.test__cardv.experience.visible').css('display', 'flex');
