@@ -82,9 +82,16 @@
         +below(800px)
             padding wm(20) 0 wm(50)
 
+    &__slider
+        margin-left w(370)
+        width w(400)
+        overflow hidden
+        +below(800px)
+            width 100%
+            margin-left wm(20)
+
     &__wrap-item
         padding 30px
-        margin-left 30%
         display flex
         flex-direction column
         justify-content center
@@ -156,7 +163,7 @@
 
     &__cardv
         position absolute
-        top 59%
+        top 60%
         left 50%
         transform translate(-50%, -50%)
         display flex

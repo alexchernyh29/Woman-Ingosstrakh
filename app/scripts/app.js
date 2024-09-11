@@ -76,6 +76,9 @@ $(() => {
             $('.test__cardv.experience.visible').css('display', 'none');
             $('.test__cardv.risk.visible').css('display', 'flex');
         }, 0);
+        }else {
+            $('.test__cardv.experience.visible').css('display', 'none');
+            $('.test__cardv.risk.visible').css('display', 'none');
         }
       });
 
@@ -189,6 +192,8 @@ $(() => {
             $(".test__wrap__button").css('display', 'none');
             $(".test__cards").css('display', 'none');
             $(".test__text").css('display', 'none');
+            $('.test__cardv.experience.visible').css('display', 'none');
+            $('.test__cardv.risk.visible').css('display', 'none');
             $(".test__wrap__next").css('display', 'flex');
             $('.test__next').click(function() {
                 currentIndex = 0;
@@ -198,6 +203,8 @@ $(() => {
                 $(".test__wrap__button").css('display', 'block');
                 $(".test__cards").css('display', 'block');
                 $(".test__text").css('display', 'block');
+                $('.test__cardv.experience.visible').css('display', 'flex');
+                $('.test__cardv.risk.visible').css('display', 'flex');
                 $(".test__wrap__next").css('display', 'none');
                 $(".test__counter-text").html(currentIndex + 1);
                 $(".test__text").html(DATA[currentIndex].title);
